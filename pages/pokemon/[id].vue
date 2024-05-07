@@ -11,8 +11,8 @@
     <button 
       @click="toggleTeam(pokemon)" 
       :class="['text-white font-semibold py-2 px-4 border rounded mt-6 block mx-auto', 
-                team.includes(pokemon) ? 'bg-red-700 hover:bg-red-500 border-red-700' : 'bg-blue-700 hover:bg-blue-500 border-blue-700']">
-      {{ team.includes(pokemon) ? '- TEAM' : '+ TEAM' }}
+                isInTeam ? 'bg-red-700 hover:bg-red-500 border-red-700' : 'bg-blue-700 hover:bg-blue-500 border-blue-700']">
+      {{ isInTeam ? '- TEAM' : '+ TEAM' }}
     </button>
   </div>
 </template>
@@ -33,4 +33,6 @@ function toggleTeam(pokemon) {
     alert("Your team is already full!")
   }
 }
+
+const isInTeam = computed(() => team.value.some(p => p.id === pokemon.value.id))
 </script>

@@ -11,15 +11,15 @@
       <button 
         @click="$emit('toggle', pokemon)" 
         :class="['text-white font-semibold py-2 px-4 rounded transition', 
-                 inTeam ? 'bg-red-700 hover:bg-red-500' : 'bg-blue-700 hover:bg-blue-500']">
-        {{ inTeam ? '- TEAM' : '+ TEAM' }}
+                 isInTeam ? 'bg-red-700 hover:bg-red-500' : 'bg-blue-700 hover:bg-blue-500']">
+        {{ isInTeam ? '- TEAM' : '+ TEAM' }}
       </button>
     </div>
   </div>
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   pokemon: {
     type: Object,
     required: true
@@ -29,4 +29,8 @@ defineProps({
     required: true
   }
 })
+
+const team = useState('team', () => [])
+
+const isInTeam = computed(() => team.value.some(p => p.id === props.pokemon.id))
 </script>
